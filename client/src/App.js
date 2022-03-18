@@ -4,21 +4,23 @@ import doudou from "./images/doudou.jpg";
 
 import Posts from "./components/Posts/Posts";
 import Form from "./components/Form/Form";
+import useStyles from './Styles'
 
 function App() {
+  const classes = useStyles();
   return (
     <Container maxWidth="lg">
-      <AppBar position="static" color="inherit">
-        <Typography variant="h2" align="center">
+      <AppBar className={classes.appBar} position="static" color="inherit">
+        <Typography className={classes.heading} variant="h2" align="center">
           DOUDOU KITCHEN
         </Typography>
-        <img src={doudou} alt="doudou kitchen" height="60" />
+        <img className={classes.image} src={doudou} alt="doudou kitchen" height="60" />
       </AppBar>
       <Grow in>
         <Container>
           <Grid
             container
-            justify="space-between"
+            justifyContent="space-between"
             alignItems="stretch"
             spacing={3}
           >
