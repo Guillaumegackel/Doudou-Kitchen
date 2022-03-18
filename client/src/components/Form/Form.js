@@ -2,19 +2,27 @@ import React, { useState } from "react";
 import FileBase from "react-file-base64";
 import useStyles from "./Styles";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import {createPost} from '../../actions/posts';
+
 
 function Form() {
   const [postData, setPostData] = useState({
     creator: "",
     title: "",
-    message: "",
+    recipe: "",
     tags: "",
     selectedFile: "",
   });
 
   const classes = useStyles();
 
-  const handleSubmit = () => {};
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+	  e.preventDefault();
+	  dispatch(createPost(postData));
+  };
 
   const clear =()=>{
 
@@ -32,7 +40,7 @@ function Form() {
         <TextField
           name="creator"
           variant="outlined"
-          label="Créateur"
+          label="creator"
           fullWidth value={postData.creator}
           onChange={(e) =>
             setPostData({ ...postData, creator: e.target.value })
@@ -41,7 +49,7 @@ function Form() {
         <TextField
           name="title"
           variant="outlined"
-          label="titre de la recette"
+          label="title"
           fullWidth value={postData.title}
           onChange={(e) => setPostData({ ...postData, title: e.target.value })}
         ></TextField>
@@ -72,8 +80,7 @@ function Form() {
         </div>
 		{/* Bouton de sauvegarde */}
 		<Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth>Sauvegarder</Button>
-
-		<Button className={classes.buttonSubmit} variant="contained" color="secondary" size="small" onClick={clear} fullWidth>Vider</Button>
+		<Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth>Vider</Button>
       </form>
     </Paper>
   );

@@ -1,7 +1,8 @@
+import React from 'react';
 import { Container, AppBar, Typography, Grow, Grid } from "@material-ui/core";
-import doudou from "./images/doudou.jpg";
-
 import { useDispatch } from "react-redux";
+
+import doudou from "./images/doudou.jpg";
 
 import Posts from "./components/Posts/Posts";
 import Form from "./components/Form/Form";
