@@ -1,5 +1,4 @@
 import { Container, AppBar, Typography, Grow, Grid } from "@material-ui/core";
-import "./App.css";
 import doudou from "./images/doudou.jpg";
 
 import Posts from "./components/Posts/Posts";
