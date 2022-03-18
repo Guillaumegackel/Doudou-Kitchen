@@ -17,7 +17,7 @@ function Form() {
   const handleSubmit = () => {};
 
   const clear =()=>{
-	  
+
   }
 
   return (
@@ -25,15 +25,15 @@ function Form() {
       <form
         autoComplete="off"
         noValidate
-        className={classes.form}
+        className={`${classes.root} ${classes.form}`}
         onSubmit={handleSubmit}
       >
         <Typography variant="h6">Noter une recette</Typography>
         <TextField
           name="creator"
           variant="outlined"
-          label="Creator"
-          fullWidthvalue={postData.creator}
+          label="Créateur"
+          fullWidth value={postData.creator}
           onChange={(e) =>
             setPostData({ ...postData, creator: e.target.value })
           }
@@ -41,22 +41,22 @@ function Form() {
         <TextField
           name="title"
           variant="outlined"
-          label="title"
-          fullWidthvalue={postData.title}
+          label="titre de la recette"
+          fullWidth value={postData.title}
           onChange={(e) => setPostData({ ...postData, title: e.target.value })}
         ></TextField>
         <TextField
           name="recipe"
           variant="outlined"
           label="recipe"
-          fullWidthvalue={postData.recipe}
+          fullWidth value={postData.recipe}
           onChange={(e) => setPostData({ ...postData, recipe: e.target.value })}
         ></TextField>
         <TextField
           name="tags"
           variant="outlined"
           label="tags"
-          fullWidthvalue={postData.tags}
+          fullWidth value={postData.tags}
           onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
         ></TextField>
 
@@ -71,10 +71,9 @@ function Form() {
           ></FileBase>
         </div>
 		{/* Bouton de sauvegarde */}
-		<button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidthvalue>Sauvegarder</button>
+		<Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth>Sauvegarder</Button>
 
-		<button className={classes.buttonSubmit} variant="contained" color="secondary" size="small" onClick={clear} fullWidthvalue>Vider</button>
-
+		<Button className={classes.buttonSubmit} variant="contained" color="secondary" size="small" onClick={clear} fullWidth>Vider</Button>
       </form>
     </Paper>
   );
