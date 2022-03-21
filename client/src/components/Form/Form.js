@@ -73,7 +73,7 @@ useEffect(() => {
           variant="outlined"
           label="tags"
           fullWidth value={postData.tags}
-          onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
+          onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })}
         ></TextField>
 
         {/* File Select */}

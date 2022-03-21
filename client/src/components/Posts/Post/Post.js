@@ -61,14 +61,14 @@ const Post = ({ post, setCurrentId }) => {
         {post.title}
       </Typography>
       <CardContent>
-        <Typography gutterBottom variant="h5" component="h2">
+        <Typography variant="body2" color="textSecondary" component="p">
           {post.recipe}
         </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
         <Button size="small" color="primary" onClick={() => dispatch(likePost(post._id))}>
           <ThumbUpAltIcon fontSize="small" />
-          GG
+          &nbsp; deja faite &nbsp;
           {post.likeCount}
         </Button>
         <Button
