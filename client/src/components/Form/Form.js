@@ -10,13 +10,13 @@ import {createPost, updatePost} from '../../actions/posts';
 
 const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({creator: "", title: "", recipe: "", tags: "",selectedFile: ""});
-	const post = useSelector((state) => (currentId ? state.posts.find((p)=> p._id === currentId) : null));
+	const poste = useSelector((state) => (currentId ? state.posts.find((p) => p._id === currentId) : null));
   const dispatch = useDispatch();
   const classes = useStyles();
 
 useEffect(() => {
-    if(post) setPostData(post);
-}, [post])
+    if(poste) setPostData(poste);
+}, [poste])
 
   const handleSubmit = (e) => {
 	  e.preventDefault();
@@ -26,10 +26,14 @@ useEffect(() => {
     } else {
       dispatch(createPost(postData));
     }
+// Whatever happened, i want you to clear
+    clear();
   };
 
+  // To clear Form fields after Submit
   const clear =()=>{
-
+    setCurrentId(null);
+    setPostData({creator: "", title: "", recipe: "", tags: "",selectedFile: ""});
   }
 
   return (
@@ -40,7 +44,7 @@ useEffect(() => {
         className={`${classes.root} ${classes.form}`}
         onSubmit={handleSubmit}
       >
-        <Typography variant="h6">Noter une recette</Typography>
+        <Typography variant="h6">{currentId ? 'Modifier une recette' : 'Créer une fiche Recette'}</Typography>
         <TextField
           name="creator"
           variant="outlined"

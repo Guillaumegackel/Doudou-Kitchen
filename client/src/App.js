@@ -13,7 +13,6 @@ import { getPosts } from "./actions/posts";
 function App() {
   const [currentId, setCurrentId] = useState(null);
   const classes = useStyles();
-
   const dispatch = useDispatch();
 
   useEffect(() => {
