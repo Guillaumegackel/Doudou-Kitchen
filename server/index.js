@@ -19,11 +19,10 @@ app.use('/posts', postRoutes);
 // app.get('/', (req, res)=>{
 // 	res.send('Hello Doudou Kitchen API')
 // })
-// const CONNECTION_URL ='mongodb+srv://guillaume:guillaume123@cluster0.v0hlh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const CONNECTION_URL ='mongodb+srv://guillaume:guillaume123@cluster0.v0hlh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT|| 5000;
 
-// || 5000;
 
 // utilisation de MongoDB en cloud
 
