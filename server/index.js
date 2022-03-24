@@ -6,6 +6,7 @@ import dotenv from "dotenv"
 import postRoutes from './routes/posts.js'
 
 const app = express();
+
 dotenv.config();
 
 
@@ -15,15 +16,17 @@ app.use(cors());
 
 app.use('/posts', postRoutes);
 
-app.get('/', (req, res)=>{
-	res.send('Hello Doudou Kitchen API')
-})
+// app.get('/', (req, res)=>{
+// 	res.send('Hello Doudou Kitchen API')
+// })
+// const CONNECTION_URL ='mongodb+srv://guillaume:guillaume123@cluster0.v0hlh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT
+
+// || 5000;
 
 // utilisation de MongoDB en cloud
 
-// const CONNECTION_URL ='mongodb+srv://guillaume:guillaume123@cluster0.v0hlh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 
 mongoose.connect(process.env.CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
