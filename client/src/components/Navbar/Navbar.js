@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { Link } from 'react-router-dom';
 import { AppBar, Button, Toolbar, Typography, Avatar } from '@material-ui/core';
 import doudou from "../../images/doudou.jpg";
@@ -7,9 +7,20 @@ import doudou from "../../images/doudou.jpg";
 import useStyles from './styles';
 
 const Navbar = () => {
+	// Pour recuperer en local le token
 	const classes =useStyles();
 
-	const user = null;
+	const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+
+	console.log(user);
+
+	// Pour eviter le refresh de log
+	useEffect(()=>{
+		const token = user?.token;
+
+		setUser(JSON.parse(localStorage.getItem('profile')));
+	}, [])
+
   return (
 	<AppBar className={classes.appBar} position="static" color="inherit">
 		<div className={classes.brandContainer}>
