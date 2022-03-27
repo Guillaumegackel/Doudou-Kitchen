@@ -9,7 +9,7 @@ import {
 import React, { useState } from "react";
 import {useDispatch} from "react-redux";
 import {GoogleLogin} from "react-google-login";
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import { LockOutlined } from "@material-ui/icons";
 import Input from "./Input";
 import Icon from "./icon";
@@ -22,7 +22,7 @@ const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
   const dispatch = useDispatch();
-  const history= useHistory();
+  const navigate= useNavigate();
 
   const handleShowPassword = () =>
     setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -44,7 +44,7 @@ try {
   dispatch({type:'AUTH', data: { result, token } });
 
   // Pour rediriger vers la HP apres connexion
-  history.push('/');
+  navigate('/');
 } catch (error) {
   console.log(error);
 }
