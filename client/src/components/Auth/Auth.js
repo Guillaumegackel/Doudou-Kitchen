@@ -18,7 +18,7 @@ import useStyles from "./styles";
 
 import {signin, signup} from '../../actions/auth';
 
-const initialState ={firstName:'', lastName:'', email:'',password:'', confirmPassword:'' }
+const initialState ={firstName:'', lastName:'', email:'',password:'', confirmPassword:'' };
 
 const Auth = () => {
   const classes = useStyles();
@@ -29,8 +29,7 @@ const Auth = () => {
   const dispatch = useDispatch();
   const navigate= useNavigate();
 
-  const handleShowPassword = () =>
-    setShowPassword((prevShowPassword) => !prevShowPassword);
+  const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
 
   const handleSubmit = (e) => {
   e.preventDefault();

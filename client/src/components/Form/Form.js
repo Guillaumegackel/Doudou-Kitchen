@@ -9,32 +9,46 @@ import {createPost, updatePost} from '../../actions/posts';
 
 
 const Form = ({ currentId, setCurrentId }) => {
-  const [postData, setPostData] = useState({creator: "", title: "", recipe: "", tags: "",selectedFile: ""});
+  const [postData, setPostData] = useState({title: "", recipe: "", tags: "",selectedFile: ""});
 	const poste = useSelector((state) => (currentId ? state.posts.find((p) => p._id === currentId) : null));
   const dispatch = useDispatch();
   const classes = useStyles();
+  const user = JSON.parse(localStorage.getItem('profile'));
+
 
 useEffect(() => {
     if(poste) setPostData(poste);
 }, [poste])
 
-  const handleSubmit = (e) => {
-	  e.preventDefault();
-    
-    if(currentId) {
-      dispatch(updatePost(currentId, postData));
-    } else {
-      dispatch(createPost(postData));
-    }
-// Whatever happened, i want you to clear
-    clear();
-  };
-
   // To clear Form fields after Submit
   const clear =()=>{
     setCurrentId(null);
-    setPostData({creator: "", title: "", recipe: "", tags: "",selectedFile: ""});
+    setPostData({title: "", recipe: "", tags: "",selectedFile: ""});
   }
+
+  const handleSubmit = (e) => {
+	  e.preventDefault();
+    
+    if (currentId === 0) {
+      dispatch(createPost({ ...postData, name: user?.result?.name }));
+      clear();
+    } else {
+      dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
+      clear();
+    }
+  };
+
+  if (!user?.result?.name) {
+    return (
+      <Paper className={classes.paper}>
+        <Typography variant="h6" align="center">
+          Connectez-vous pour enregistrer votre recette !
+        </Typography>
+      </Paper>
+    );
+  }
+
+
 
   return (
     <Paper className={classes.paper}>
@@ -45,15 +59,6 @@ useEffect(() => {
         onSubmit={handleSubmit}
       >
         <Typography variant="h6">{currentId ? 'Modifier une recette' : 'Créer une fiche Recette'}</Typography>
-        <TextField
-          name="creator"
-          variant="outlined"
-          label="creator"
-          fullWidth value={postData.creator}
-          onChange={(e) =>
-            setPostData({ ...postData, creator: e.target.value })
-          }
-        ></TextField>
         <TextField
           name="title"
           variant="outlined"
