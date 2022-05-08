@@ -52,7 +52,7 @@ const Post = ({ post, setCurrentId }) => {
           {moment(post.createdAt).fromNow()}
         </Typography>
       </div>
-
+      {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
       <div className={classes.overlay2}>
         <Button
           style={{ color: "white" }}
@@ -62,6 +62,7 @@ const Post = ({ post, setCurrentId }) => {
           <MoreHorizIcon fontSize="medium" />
         </Button>
       </div>
+      )}
 
       <div className={classes.details}>
         <Typography variant="body2" color="textSecondary" component="h2">
@@ -84,8 +85,9 @@ const Post = ({ post, setCurrentId }) => {
       <CardActions className={classes.cardActions}>
         <Button size="small" color="primary" disabled={!user?.result} onClick={() => dispatch(likePost(post._id))}>
           <ThumbUpAltIcon fontSize="small" />
-          &nbsp; deja faite &nbsp;
-          {post.likeCount}
+          <Likes />
+          {/* &nbsp; deja faite &nbsp;
+          {post.likeCount} */}
         </Button>
         {/* Action de supprimer uniquement pour les posts que le user a créé */}
         {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
