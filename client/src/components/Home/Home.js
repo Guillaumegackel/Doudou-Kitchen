@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Grow, Grid, AppBar, TextField, Button, Paper, Chip } from '@material-ui/core';
+import { Container, Grow, Grid, AppBar, TextField, Button, Paper } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { getPostsBySearch } from '../../actions/posts';
+import { getPosts, getPostsBySearch } from '../../actions/posts';
 
-
-
-import { getPosts } from '../../actions/posts';
 import Posts from '../Posts/Posts';
 import Form from '../Form/Form';
 import Pagination from '../Pagination';
@@ -26,17 +23,12 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const [search, setSearch] = useState('');
-  const [tags, setTags] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [currentId, dispatch]);
-
   const searchPost = () => {
-    if (search.trim() || tags) {
-      dispatch(getPostsBySearch({ search, tags: tags.join(',') }));
-      navigate(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`);
+    if (search.trim()) {
+      dispatch(getPostsBySearch({ search }));
+      navigate(`/posts/search?searchQuery=${search}`);
     } else {
       navigate('/');
     }
@@ -48,10 +40,6 @@ const Home = () => {
     }
   };
 
-  const handleAddChip = (tag) => setTags([...tags, tag]);
-
-  const handleDeleteChip = (chipToDelete) => setTags(tags.filter((tag) => tag !== chipToDelete));
-
   return (
     <Grow in>
       <Container maxWidth="xl">
@@ -62,15 +50,16 @@ const Home = () => {
           <Grid item xs={12} sm={6} md={3}>
             <AppBar className={classes.appBarSearch} position="static" color="inherit">
 
-              <TextField onKeyDown={handleKeyPress} name="search" variant="outlined" label="Rechercher une recette" fullWidth value={search} onChange={(e) => setSearch(e.target.value)} />
+              <TextField onKeyDown={handleKeyPress} name="search" variant="outlined" label="Rechercher une recette" fullWidth value={search} onChange={(e) => setSearch(e.target.value)} style={{ margin: '10px 0' }}/>
 
-              <TextField onKeyDown={handleKeyPress} name="searchTags" variant="outlined" label="Rechercher un ingrédient" fullWidth value={tags} onChange={(e) => setTags(e.target.value)} style={{ margin: '10px 0' }}
- />
+{/* TAGS A INCLURE DANS LE MOTEUR PRINCIPAL */}
+              {/* <TextField onKeyDown={handleKeyPress} name="searchTags" variant="outlined" label="Rechercher un ingrédient" fullWidth value={tags} onChange={(e) => setTags(e.target.value)} style={{ margin: '10px 0' }}
+ /> */}
 
               <Button onClick={searchPost} className={classes.searchButton} variant="contained" color="primary">Rechercher</Button>
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
-            {(!searchQuery && !tags.length) && (
+            {(!searchQuery ) && (
               <Paper className={classes.pagination} elevation={6}>
                 <Pagination page={page} />
               </Paper>

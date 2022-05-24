@@ -4,6 +4,7 @@ import decode from "jwt-decode";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AppBar, Button, Toolbar, Typography, Avatar } from "@material-ui/core";
 import * as actionType from "../../constants/actionTypes";
+import meal from "../../images/meal.png"
 import useStyles from "./styles";
 
 const Navbar = () => {
@@ -34,11 +35,12 @@ const Navbar = () => {
   }, [location]);
 
   return (
-    <AppBar className={classes.appBar} position="static" color="inherit">
+    <AppBar className={classes.appBar} position="static" color="inherit" >
+      <Link to="/" className={classes.heading}
+>
       <div className={classes.brandContainer}>
-        <Typography
-          component={Link}
-          to="/"
+      <img className={classes.image} src={meal} alt="meal" height="45" />         
+      <Typography
           className={classes.heading}
           variant="h2"
           align="center"
@@ -47,6 +49,8 @@ const Navbar = () => {
         </Typography>
         {/* <img className={classes.image} src={doudou} alt="doudou kitchen" height="60" /> */}
       </div>
+      </Link>
+      
 
       <Toolbar className={classes.toolbar}>
         {user?.result ? (
