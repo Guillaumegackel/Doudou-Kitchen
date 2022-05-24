@@ -22,8 +22,14 @@ const Home = () => {
   const [currentId, setCurrentId] = useState(0);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(getPosts());
+  }, [currentId, dispatch]);
+
   const [search, setSearch] = useState('');
   const navigate = useNavigate();
+
+
 
   const searchPost = () => {
     if (search.trim()) {

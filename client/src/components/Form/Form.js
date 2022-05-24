@@ -1,30 +1,31 @@
 import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
-import useStyles from "./Styles";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import {createPost, updatePost} from '../../actions/posts';
-
-
-
+import { useNavigate } from 'react-router-dom';
+import useStyles from "./Styles";
 
 const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({title: "", recipe: "", tags: "",selectedFile: ""});
-	const poste = useSelector((state) => (currentId ? state.posts.find((p) => p._id === currentId) : null));
+	const poste = useSelector((state) => (currentId ? state.posts.posts.find((p) => p._id === currentId) : null));
   const dispatch = useDispatch();
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem('profile'));
-
-
-useEffect(() => {
-    if(poste) setPostData(poste);
-}, [poste])
+  const Navigate = useNavigate();
 
   // To clear Form fields after Submit
   const clear =()=>{
     setCurrentId(null);
     setPostData({title: "", recipe: "", tags: "",selectedFile: ""});
   }
+
+useEffect(() => {
+  // if (!poste.title) clear();
+    if(poste) setPostData(poste);
+}, [poste])
+
+
 
   const handleSubmit = (e) => {
 	  e.preventDefault();
