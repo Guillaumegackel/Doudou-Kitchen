@@ -13,7 +13,6 @@ import {useNavigate} from 'react-router-dom';
 import { LockOutlined } from "@material-ui/icons";
 import Input from "./Input";
 import Icon from "./icon";
-import { AUTH } from '../../constants/actionTypes';
 import {signin, signup} from '../../actions/auth';
 
 import useStyles from "./styles";
