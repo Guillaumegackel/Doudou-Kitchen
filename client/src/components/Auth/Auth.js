@@ -13,62 +13,65 @@ import {useNavigate} from 'react-router-dom';
 import { LockOutlined } from "@material-ui/icons";
 import Input from "./Input";
 import Icon from "./icon";
+import { AUTH } from '../../constants/actionTypes';
+import {signin, signup} from '../../actions/auth';
 
 import useStyles from "./styles";
 
-import {signin, signup} from '../../actions/auth';
 
 const initialState ={firstName:'', lastName:'', email:'',password:'', confirmPassword:'' };
 
 const Auth = () => {
-  const classes = useStyles();
-
-  const [showPassword, setShowPassword] = useState(false);
-  const [isSignup, setIsSignup] = useState(false);
   const [formData, setFormData] = useState(initialState);
+  const [isSignup, setIsSignup] = useState(false);
   const dispatch = useDispatch();
   const navigate= useNavigate();
+  const classes = useStyles();
 
+
+  const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
+
+  const switchMode = () => {
+    setFormData(initialState);
+    setIsSignup((prevIsSignup) => !prevIsSignup);
+    setShowPassword(false);
+  };
 
   const handleSubmit = (e) => {
   e.preventDefault();
+
+  console.log(formData);
 
   if(isSignup){
     dispatch(signup(formData, navigate))
   } else{
     dispatch(signin(formData, navigate))
-
   }
   };
 
-  const handleChange = (e) => {
-setFormData({...formData, [e.target.name]:e.target.value})
-  };
-
-  const switchMode = () => {
-    setIsSignup((prevIsSignup) => !prevIsSignup);
-    setShowPassword(false);
-  };
-
   const googleSuccess = async (res) =>{
-const result = res?.profileObj;
-const token = res?.tokenId;
+    const result = res?.profileObj;
+    const token = res?.tokenId;
+    
+    try {
+      dispatch({type:'AUTH', data: { result, token } });
+    
+      // Pour rediriger vers la HP apres connexion
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
+      };
+    
+      const googleFailure = (error) =>{
+        console.log(error);
+    console.log("Votre tentative de connexion a échoué - Essayez une nouvelle fois ");
+      };
 
-try {
-  dispatch({type:'AUTH', data: { result, token } });
+  const handleChange = (e) => 
+setFormData({...formData, [e.target.name]:e.target.value});
 
-  // Pour rediriger vers la HP apres connexion
-  navigate('/');
-} catch (error) {
-  console.log(error);
-}
-  };
-
-  const googleFailure = (error) =>{
-    console.log(error);
-console.log("Votre tentative de connexion a échoué - Essayez une nouvelle fois ");
-  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -77,7 +80,7 @@ console.log("Votre tentative de connexion a échoué - Essayez une nouvelle fois
           <LockOutlined></LockOutlined>
         </Avatar>
         <Typography variant="h5">{isSignup ? "Sign Up" : "Sign In"}</Typography>
-        <form className={classes.form} onSubmit={handleSubmit} />
+        <form className={classes.form} onSubmit={handleSubmit} >
         <Grid container spacing={2}>
           {isSignup && (
             <>
@@ -119,7 +122,7 @@ console.log("Votre tentative de connexion a échoué - Essayez une nouvelle fois
           )}
         </Grid>
         <Button
-          type="submit"
+          type="Submit"
           fullWidth
           variant="contained"
           color="primary"
@@ -155,6 +158,7 @@ console.log("Votre tentative de connexion a échoué - Essayez une nouvelle fois
             </Button>
           </Grid>
         </Grid>
+        </form>
       </Paper>
     </Container>
   );
