@@ -21,7 +21,7 @@ export default makeStyles((theme) => ({
     textDecoration: 'none',
   },
   image: {
-    marginRight: '25px',
+    margin: '0px 5px',
         [theme.breakpoints.down('sm')]: {
       display: 'none',
   },
@@ -31,11 +31,10 @@ export default makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'flex-end',
     width: '400px',
-  //   [theme.breakpoints.down('sm')]: {
-  //     justifyContent: 'space-evenly',
-  //     alignItems: 'center',
-  // },
+    [theme.breakpoints.down('sm')]: {
+      flexDirection: 'column',
   },
+},
   profile: {
     display: 'flex',
     justifyContent: 'space-evenly',

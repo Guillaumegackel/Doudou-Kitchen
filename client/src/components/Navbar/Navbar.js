@@ -5,6 +5,9 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AppBar, Button, Toolbar, Typography, Avatar } from "@material-ui/core";
 import * as actionType from "../../constants/actionTypes";
 import meal from "../../images/meal.png"
+import note from "../../images/note.png"
+import drink from "../../images/drink.png"
+
 import useStyles from "./styles";
 
 const Navbar = () => {
@@ -39,7 +42,7 @@ const Navbar = () => {
       <Link to="/" className={classes.heading}
 >
       <div className={classes.brandContainer}>
-      <img className={classes.image} src={meal} alt="meal" height="45" />         
+      {/* <img className={classes.image} src={meal} alt="meal" height="45" />          */}
       <Typography
           className={classes.heading}
           variant="h2"
@@ -47,7 +50,9 @@ const Navbar = () => {
         >
           DOUDOU KITCHEN
         </Typography>
-        {/* <img className={classes.image} src={doudou} alt="doudou kitchen" height="60" /> */}
+        <img className={classes.image} src={meal} alt="drink" height="45" />    
+        <img className={classes.image} src={drink} alt="drink" height="45" />    
+        <img className={classes.image} src={note} alt="drink" height="45" />    
       </div>
       </Link>
       
