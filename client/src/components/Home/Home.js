@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Container, Grow, Grid, AppBar, TextField, Button, Paper } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { getPosts, getPostsBySearch } from '../../actions/posts';
+import { getPostsBySearch } from '../../actions/posts';
 
 import Posts from '../Posts/Posts';
 import Form from '../Form/Form';

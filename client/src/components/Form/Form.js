@@ -62,21 +62,21 @@ useEffect(() => {
         <TextField
           name="title"
           variant="outlined"
-          label="title"
+          label="Titre de la recette"
           fullWidth value={postData.title}
           onChange={(e) => setPostData({ ...postData, title: e.target.value })}
         ></TextField>
         <TextField
           name="recipe"
           variant="outlined"
-          label="recipe"
+          label="Description"
           fullWidth value={postData.recipe}
           onChange={(e) => setPostData({ ...postData, recipe: e.target.value })}
         ></TextField>
         <TextField
           name="tags"
           variant="outlined"
-          label="tags"
+          label="Ingrédients"
           fullWidth value={postData.tags}
           onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })}
         ></TextField>
