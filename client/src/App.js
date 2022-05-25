@@ -7,21 +7,25 @@ import PostDetails from './components/PostDetails/PostDetails';
 
 import Auth from './components/Auth/Auth';
 
-const App = () => (
+const App = () => {
+const user = JSON.parse(localStorage.getItem('profile'))
+
+return(
+
   <BrowserRouter>
-    <Container maxWidth="lg">
+    <Container maxWidth="xl">
       <Navbar />
       <Routes>
-      <Route path='/auth' exact element={<Auth/>} />
-      <Route path="/posts" element={<Home/>} />
-      <Route path="/" element={<Navigate to='/posts' replace/>} />
-
-        <Route path='/' exact element={<Home/>} />
-        <Route path="/posts/search" element={<Home/>} />
-        <Route path="/posts/:id" exact element={<PostDetails/>} />
+      <Route path="/" exact element={<Navigate to='/posts' replace/>} />
+      <Route path="/posts" exact element={<Home/>} />
+      <Route path="/posts/search" element={<Home/>} />
+      <Route path="/posts/:id" exact element={<PostDetails/>} />
+      <Route path='/auth' exact element={(<Auth/>)} />
       </Routes>
     </Container>
   </BrowserRouter>
-  );
+);
+};
+  
 
 export default App;

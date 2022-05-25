@@ -26,14 +26,15 @@ const Home = () => {
   const navigate = useNavigate();
 
   const searchPost = () => {
-    if (search.trim()) {
-      dispatch(getPostsBySearch({ search }));
-      navigate(`/posts/search?searchQuery=${search}`);
+    if (search.trim() ) {
+      dispatch(getPostsBySearch({search}));
+      navigate(`/posts/search?searchQuery=${search || 'none' }`);
     } else {
       navigate('/');
     }
   };
 
+  // For enter Key
   const handleKeyPress = (e) => {
     if (e.keyCode === 13) {
       searchPost();
@@ -50,7 +51,15 @@ const Home = () => {
           <Grid item xs={12} sm={6} md={3}>
             <AppBar className={classes.appBarSearch} position="static" color="inherit">
 
-              <TextField onKeyDown={handleKeyPress} name="search" variant="outlined" label="Rechercher une recette" fullWidth value={search} onChange={(e) => setSearch(e.target.value)} style={{ margin: '10px 0' }}/>
+              <TextField 
+              onKeyDown={handleKeyPress} 
+              name="search" 
+              variant="outlined" 
+              label="Rechercher une recette" 
+              fullWidth 
+              value={search} 
+              onChange={(e) => setSearch(e.target.value)} 
+              style={{ margin: '10px 0' }}/>
 
 {/* TAGS A INCLURE DANS LE MOTEUR PRINCIPAL */}
               {/* <TextField onKeyDown={handleKeyPress} name="searchTags" variant="outlined" label="Rechercher un ingrédient" fullWidth value={tags} onChange={(e) => setTags(e.target.value)} style={{ margin: '10px 0' }}
