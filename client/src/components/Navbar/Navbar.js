@@ -42,7 +42,6 @@ const Navbar = () => {
       <Link to="/" className={classes.heading}
 >
       <div className={classes.brandContainer}>
-      {/* <img className={classes.image} src={meal} alt="meal" height="45" />          */}
       <Typography
           className={classes.heading}
           variant="h2"
@@ -76,7 +75,7 @@ const Navbar = () => {
               color="secondary"
               onClick={logout}
             >
-              Logout
+              Deconnexion
             </Button>
           </div>
         ) : (
@@ -86,7 +85,7 @@ const Navbar = () => {
             variant="contained"
             color="primary"
           >
-            Sign In
+            Connectez vous
           </Button>
         )}
       </Toolbar>
